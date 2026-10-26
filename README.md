@@ -12,9 +12,15 @@
 | R波定位误差 | 【1.9】±【0.4】ms |
 | SDNN / RMSSD / pNN50 | 【】/【】/【】 |
 | LF / HF / LF-HF | 【】/【】/【0.25】|
-
+| **批量宏平均(48条)** | Se=92.11%±16.9 |
+| **批量宏平均(48条)** | +P=99.89%±0.4 |
 ![检测效果](results/detection_check.png)
+## 批量基准
 
+对MIT-BIH全部48条记录运行完整管线（约11万拍）：
+微平均 Se=92.04%，+P=99.89%（TP=100780, FP=114, FN=8714）。
+每条明细见 `results/batch_summary.csv`（按Se升序，垫底记录对应
+电极脱落/室早连发/严重噪声等已知难点，详见报告讨论）。
 ## 流程
 
 1. **读取** record 100（360Hz，MIT-BIH）
@@ -33,3 +39,4 @@ src/preprocess.py   滤波模块
 src/detect.py       R波检测+评估
 src/hrv.py          HRV指标
 main.py             全流程入口
+
